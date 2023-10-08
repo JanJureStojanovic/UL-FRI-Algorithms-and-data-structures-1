@@ -1,0 +1,24 @@
+Polde igra računalniško igro, ki jo sestavlja n ugank. Pri posamezni uganki lahko dobi eno ali dve zvezdici, odvisno od tega, kako dobro jo reši; lahko pa uganko tudi preskoči in je sploh ne rešuje. Če jo hoče rešiti za dve zvezdici, bo porabil za reševanje več časa kot le za eno zvezdico. Natančneje povedano: pri uganki i (za i=1,2,…,n) porabi Polde ai enot časa, če jo hoče rešiti za eno zvezdico, oz. bi enot časa, če jo hoče rešiti za dve zvezdici (če pa je sploh ne rešuje, ne porabi tam nič časa). Polde ne more reševati več ugank naenkrat, zato je skupni čas reševanja preprosto vsota časov reševanja po posameznih ugankah. Polde bi rad v čim manj časa dobil natanko w zvezdic.
+
+Opiši algoritem, ki ugotovi, najmanj koliko enot časa potrebuje za to in katere uganke naj v ta namen reši za eno in katere za dve zvezdici. Dokaži pravilnost svoje rešitve in analiziraj njeno časovno zahtevnost.
+
+Omejitve podatkov:
+1≤n≤3⋅10^5
+1≤w≤2n
+1≤ai<bi≤10^9 za vse i=1,…,n
+
+Vhodni in izhodni podatki:
+V prvi vrstici sta celi števili n in w, ločeni s presledkom. Sledi n vrstic, od katerih i-ta vsebuje celi števili ai in bi, ločeni s presledkom. V prvo vrstico izpiši eno samo celo število, namreč najmanjši čas, v katerem je mogoče dobiti natanko w zvezdic. V drugo vrstico izpiši niz n znakov, ki pove, kako naj Polde rešuje uganke, da bo v tem minimalnem času dobil natanko w zvezdic. V tem nizu naj bo i-ti znak enak 0, če naj Polde i-to uganko preskoči; 1, če naj jo reši za eno zvezdico; in 2, če naj jo reši za dve zvezdici. Če je možnih več enako dobrih rešitev, je vseeno, katero izpišeš.
+
+Primer vhoda:
+5 3
+10 20
+25 30
+6 9
+5 10
+10 20
+
+Pravilen izhod:
+14
+00210
+
