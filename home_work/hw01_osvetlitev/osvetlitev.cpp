@@ -44,23 +44,32 @@ int main() {
     // Sum of unlit spots
     int sum = 0;
 
+    /* 
     // Variables to check for unlit spots before the first lamp and after the last lamp
     int spredaj = m;
     int zadaj = m;
+    */
 
     for (int i = 0; i < lamps.size() - 1; i++) {
 
+        /* 
         // Beggining and end check
         if (lamps[i].first < spredaj) spredaj = lamps[i].first;
         if (m - lamps[i].second < zadaj) zadaj = m - lamps[i].second;
+        */
 
         if (lamps[i+1].first - lamps[i].second > 0) sum += lamps[i+1].first - lamps[i].second;  
     }
     
+    /* 
     // Beggining and end check on the last lamp
     if (lamps.back().first < spredaj) spredaj = lamps.back().first;
     if (m - lamps.back().second < zadaj) zadaj = m - lamps.back().second;
+    */
+
+    int front = (lamps[0].first < 0) ? 0 : lamps[0].first;
+    int back = (lamps.back().second > m) ? 0 : m - lamps.back().second;
     
-    cout << sum + spredaj + zadaj << endl;
+    cout << sum + front + back << endl;
 }
 
