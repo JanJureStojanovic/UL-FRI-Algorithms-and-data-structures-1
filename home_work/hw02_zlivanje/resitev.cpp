@@ -5,6 +5,64 @@
 
 using namespace std;
 
+void izpis(vector<vector<int>> cete) {
+    for (int i = 0; i < cete.size(); i++) {
+        for (int j = 0; j < cete[i].size(); j++) {
+            cout << cete[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+vector<vector<int>> zlij(vector<vector<int>> cete, int k) { 
+
+    // The new return vector
+    vector<vector<int>> nove_cete;
+        
+    for (int i = 0; i < cete.size(); i += k) { 
+
+        // Nova ceta, ki nastane iz k starih cet
+        vector<int> nova_ceta;
+
+        int nr_empty = 0;
+
+        while(nr_empty != k) { // Ponavljamo dokler ne spraznemo vseh k cet
+
+            nr_empty = 0; // Sproti preverjamo ali so vsi prazni
+            
+            int min_el = 2147483647; // Trenutni min element
+            int ix; // Trenutni indeks vektorja, kateremu bomo odstranili prvi element
+            int kandidat; // Kandida, ki lahko potenicalno zamenja trenutni najmanjsi element
+            
+            for (int j = i; j < i + k && j < cete.size(); j++) {
+                
+                if (cete[j].empty()) {
+                    nr_empty++;
+                } else {
+                    kandidat = cete[j].front();
+                    if (kandidat < min_el) {
+                        min_el = kandidat;
+                        ix = j;
+                    }
+                }  
+            }
+            
+            if (nr_empty != k) { 
+                // Imamo min_el
+                nova_ceta.push_back(min_el);
+                // Odstranimo min_el
+                cete[ix].erase(cete[ix].begin());
+            }    
+        }
+
+        // Dodamo eno novo ceto, ki je nastala iz k cet
+        nove_cete.push_back(nova_ceta);
+    }
+
+    // Vrnemo vektor novih cet
+    return nove_cete;
+}
+
 int main() {
 
     // Parameters
@@ -48,27 +106,16 @@ int main() {
 
     cete.back().push_back(y); // Add the forgotten element
 
+    cout << endl;
+
     // Now that we have a vector of vectors we can sort it accordingly
-
     for (int i = 0; i < a; i++) { // The amount of times we sort the main vector
-
-        for (int j = 0; j < cete.size(); j += k) { // The number of subset vectors we merge
-
-        }
-    }
-
-
-
-
-
-
-
-
-
-    /*for (int i = 0; i < cete.size(); i++) {
-        for (int j = 0; j < cete[i].size(); j++) {
-            cout << cete[i][j] << " ";
-        }
+        
+        izpis(cete);
         cout << endl;
-    }*/
+
+        cete = zlij(cete, k);
+
+        // Preverimo ce je celoten array sorted
+    }
 }
