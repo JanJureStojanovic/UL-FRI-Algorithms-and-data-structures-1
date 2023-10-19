@@ -67,7 +67,7 @@ int main() {
     if (m - lamps.back().second < zadaj) zadaj = m - lamps.back().second;
     */
 
-    int front = (lamps[0].first < 0) ? 0 : lamps[0].first;
+    int front = (lamps.front().first < 0) ? 0 : lamps[0].first;
     int back = (lamps.back().second > m) ? 0 : m - lamps.back().second;
     
     cout << sum + front + back << endl;
