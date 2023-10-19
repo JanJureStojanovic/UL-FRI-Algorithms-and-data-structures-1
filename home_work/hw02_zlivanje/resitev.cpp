@@ -8,29 +8,30 @@ using namespace std;
 void izpis(vector<vector<int>> cete) {
     for (int i = 0; i < cete.size(); i++) {
         for (int j = 0; j < cete[i].size(); j++) {
-            cout << cete[i][j] << " ";
+            cout << cete[i][j] << endl;
         }
-        cout << endl;
     }
 }
 
 vector<vector<int>> zlij(vector<vector<int>> cete, int k) { 
-
+    
     // The new return vector
     vector<vector<int>> nove_cete;
         
     for (int i = 0; i < cete.size(); i += k) { 
-
+        
         // Nova ceta, ki nastane iz k starih cet
         vector<int> nova_ceta;
 
         int nr_empty = 0;
 
-        while(nr_empty != k) { // Ponavljamo dokler ne spraznemo vseh k cet
-
+        int end = (cete.size() < i + k) ? cete.size() - i : k;
+        
+        while(nr_empty != end) { // Ponavljamo dokler ne spraznemo vseh k cet
+            
             nr_empty = 0; // Sproti preverjamo ali so vsi prazni
             
-            int min_el = 2147483647; // Trenutni min element
+            int min_el = 2147483647; // Trenutni min element (max. integer value)
             int ix; // Trenutni indeks vektorja, kateremu bomo odstranili prvi element
             int kandidat; // Kandida, ki lahko potenicalno zamenja trenutni najmanjsi element
             
@@ -47,12 +48,12 @@ vector<vector<int>> zlij(vector<vector<int>> cete, int k) {
                 }  
             }
             
-            if (nr_empty != k) { 
+            if (nr_empty != end) { 
                 // Imamo min_el
                 nova_ceta.push_back(min_el);
                 // Odstranimo min_el
                 cete[ix].erase(cete[ix].begin());
-            }    
+            }   
         }
 
         // Dodamo eno novo ceto, ki je nastala iz k cet
@@ -106,16 +107,14 @@ int main() {
 
     cete.back().push_back(y); // Add the forgotten element
 
-    cout << endl;
-
     // Now that we have a vector of vectors we can sort it accordingly
     for (int i = 0; i < a; i++) { // The amount of times we sort the main vector
-        
-        izpis(cete);
-        cout << endl;
 
-        cete = zlij(cete, k);
+        cete = zlij(cete, k); // Opravimo naravno k-zlivanje
 
-        // Preverimo ce je celoten array sorted
+        // Preverimo ce je celoten array sorted -> lahko nehamo
+        if (cete.size() == 1) break;
     }
+
+    izpis(cete);
 }
