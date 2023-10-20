@@ -13,6 +13,28 @@ void izpis(vector<vector<int>> cete) {
     }
 }
 
+vector<vector<int>> zlij_fake(vector<vector<int>> cete, int k) {
+    
+    // The new return vector
+    vector<vector<int>> nove_cete;
+        
+    for (int i = 0; i < cete.size(); i += k) { 
+
+        vector<int> ceta;
+
+        for (int j = i; j < i + k && j < cete.size(); j++) {
+                
+            ceta.insert(ceta.end(), cete[j].begin(), cete[j].end());
+            //sort(ceta.begin(), ceta.end());
+        }
+        sort(ceta.begin(), ceta.end());
+    
+        nove_cete.push_back(ceta);
+    }
+
+    return nove_cete;
+}
+
 vector<vector<int>> zlij(vector<vector<int>> cete, int k) { 
     
     // The new return vector
@@ -110,7 +132,7 @@ int main() {
     // Now that we have a vector of vectors we can sort it accordingly
     for (int i = 0; i < a; i++) { // The amount of times we sort the main vector
 
-        cete = zlij(cete, k); // Opravimo naravno k-zlivanje
+        cete = zlij_fake(cete, k); // Opravimo naravno k-zlivanje
 
         // Preverimo ce je celoten array sorted -> lahko nehamo
         if (cete.size() == 1) break;
