@@ -8,7 +8,7 @@ using namespace std;
 void izpis(vector<vector<int>> cete) {
     for (int i = 0; i < cete.size(); i++) {
         for (int j = 0; j < cete[i].size(); j++) {
-            cout << cete[i][j] << endl;
+            cout << cete[i][j] << "\n";
         }
     }
 }
