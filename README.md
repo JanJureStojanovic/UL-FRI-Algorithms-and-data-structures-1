@@ -18,8 +18,6 @@ This repository serves as a comprehensive collection of code and projects relate
     Nonobligatory challanges that were posted by our professor
 - `lectures`:
     Holds weekly source code from our lectures and some Jupyter Notebook files as 
-- `revision`:
-    Solved old exams and midterms
 
 ## Setup 
 Each program can be tested using the following sequence of commands:
