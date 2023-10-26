@@ -11,7 +11,7 @@ int main() {
     int n;
     cin >> n;
 
-    // Stack and Queue data structures
+    // Stack data structures
     stack<pair<int, int>> sklad;
     stack<pair<int, int>> vrsta;
 
@@ -19,11 +19,13 @@ int main() {
     int num;
     cin >> num;
 
+    // Add the first pair to stacks
     sklad.push(make_pair(0, num));
     vrsta.push(make_pair(0, num));
 
-    long long final_sum = 0;
-    int queue_max = num;
+    long long final_sum = 0; // Where we keep our final sum
+    
+    int queue_max = num; // Stack 2 max height storage
 
     pair<int, int> new_pair;
 
@@ -47,9 +49,11 @@ int main() {
 
         // --------------- STACK_2 OPERATIONS ---------------
 
-        /* If the new number is bigger than the current max element of queue, we add its index
-        to the final sum and empty the stack and add the new element and its index as only stack
-        element and change the current max*/
+        /* 
+        If the new number is bigger than the current max element, we add its index to 
+        the final sum and empty the queue and add the new element and its index as only stack
+        element and change the current max
+        */
 
         if (num >= queue_max) {
 
@@ -76,7 +80,6 @@ int main() {
             // We simply add the new pair and continue
             vrsta.push(new_pair);
             continue;
-
         } 
         
         if (num >= vrsta.top().second) { 
@@ -88,19 +91,20 @@ int main() {
 
             // Primerjamo indekse
             final_sum += i - vrsta.top().first - 1;
-            // Add the new element (if we can see over this one we can se over all of the ones before it)
+            // Add the new element (if we can see over this one we can see over all of the ones before it)
             vrsta.push(new_pair);
         }
 	}
 
     // --------------- STACK_1 OPERATIONS ---------------
 
-    // Stack filled with el. with no greater elements
+    // Stack filled only with el. with no greater elements on their right (with a higher index)
 	while (sklad.empty() == false) {
 		final_sum += n - sklad.top().first - 1;
 		sklad.pop();
 	}
 
-    cout << final_sum << endl;
+    // Final output 
+    cout << final_sum << "\n";
     
 }
