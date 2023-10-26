@@ -28,7 +28,7 @@ Each program can be tested using the following sequence of commands:
 g++ -std=c++20 -o FileName FileName.cpp 
 ./FileName < test.in > test.res
 
-// Time check:
+// Runtime check
 time ./FileName < test.in > test.res
 ```
 
