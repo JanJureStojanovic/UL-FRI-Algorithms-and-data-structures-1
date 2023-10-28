@@ -17,7 +17,7 @@ This repository serves as a comprehensive collection of code and projects relate
 - `challanges`:
     Nonobligatory challanges that were posted by our professor
 - `lectures`:
-    Holds weekly source code from our lectures and some Jupyter Notebook files as 
+    Holds weekly source code from our lectures and Jupyter Notebook files that serve as curriculum notes
 
 ## Setup 
 Each program can be tested using the following sequence of commands:
