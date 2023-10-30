@@ -13,7 +13,11 @@ void izpis(vector<vector<int>> cete) {
     }
 }
 
-vector<vector<int>> zlij_fake(vector<vector<int>> cete, int k) {
+vector<vector<int>> zlij(vector<vector<int>> cete, int k) {
+
+    if (cete.size() == 1) { // Check if we only have one vector -> its sorted
+        return cete;
+    }
     
     // The new return vector
     vector<vector<int>> nove_cete;
@@ -35,6 +39,62 @@ vector<vector<int>> zlij_fake(vector<vector<int>> cete, int k) {
     return nove_cete;
 }
 
+int main() {
+
+    // Parameters
+    int n, k, a;
+    cin >> n >> k >> a;
+
+    // Vector that holds ascending subsets
+    vector<vector<int>> cete;
+
+    int x, y; // The two neighbouring numbers
+    cin >> x;
+
+    for (int i = 0; i < n - 1; i++) {
+
+        vector<int> ceta;
+        cete.push_back(ceta);
+
+        for (int j = i; j < n - 1; j++) {
+
+            i++; // Moving the i along
+
+            // We scan the next number -> we have two options
+            cin >> y;
+            
+            // 1st option: x <= y
+            if (x <= y) {
+                cete.back().push_back(x);
+                x = y;
+            }
+
+            // 2nd option: x > y
+            if (x > y) {
+                cete.back().push_back(x);
+                x = y;
+                break;
+            }
+        }
+
+        i--; // Decrement of one needed since the for loop adds one
+    }
+
+    cete.back().push_back(y); // Add the forgotten element
+
+    // Now that we have a vector of vectors we can sort it accordingly
+    for (int i = 0; i < a; i++) { // The amount of times we sort the main vector
+
+        cete = zlij(cete, k); // Opravimo naravno k-zlivanje
+
+        // Preverimo ce je celoten array sorted -> lahko nehamo
+        if (cete.size() == 1) break;
+    }
+
+    izpis(cete);
+}
+
+/* 
 vector<vector<int>> zlij(vector<vector<int>> cete, int k) { 
     
     // The new return vector
@@ -85,58 +145,5 @@ vector<vector<int>> zlij(vector<vector<int>> cete, int k) {
     // Vrnemo vektor novih cet
     return nove_cete;
 }
+*/
 
-int main() {
-
-    // Parameters
-    int n, k, a;
-    cin >> n >> k >> a;
-
-    // Vector that holds ascending subsets
-    vector<vector<int>> cete;
-
-    int x, y; // The two neighbouring numbers
-    cin >> x;
-
-    for (int i = 0; i < n - 1; i++) {
-
-        vector<int> ceta;
-        cete.push_back(ceta);
-
-        for (int j = i; j < n - 1; j++) {
-
-            i++; // Moving the i along
-
-            // We scan the next number -> we have two options
-            cin >> y;
-            
-            // 1st option: x <= y
-            if (x <= y) {
-                cete.back().push_back(x);
-                x = y;
-            }
-
-            // 2nd option: x > y
-            if (x > y) {
-                cete.back().push_back(x);
-                x = y;
-                break;
-            }
-        }
-
-        i--; // Decrement of one needed since the for loop adds one
-    }
-
-    cete.back().push_back(y); // Add the forgotten element
-
-    // Now that we have a vector of vectors we can sort it accordingly
-    for (int i = 0; i < a; i++) { // The amount of times we sort the main vector
-
-        cete = zlij_fake(cete, k); // Opravimo naravno k-zlivanje
-
-        // Preverimo ce je celoten array sorted -> lahko nehamo
-        if (cete.size() == 1) break;
-    }
-
-    izpis(cete);
-}
