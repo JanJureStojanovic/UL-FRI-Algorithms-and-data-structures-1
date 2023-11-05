@@ -51,8 +51,10 @@ int main() {
 
         // Output the median value
         if (bottom_half.size() >= top_half.size()) {
+            // Spodnja polovca >= Zgornja polovica -> izpis najvecjega v spodnji polovici
             cout << bottom_half.top() << "\n";
         } else  {
+            // Sicer
             cout << top_half.top() << "\n";
         }
     }
