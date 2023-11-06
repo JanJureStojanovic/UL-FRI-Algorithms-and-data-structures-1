@@ -10,7 +10,11 @@ int main() {
 
     multiset<int> vreca;
 
+    // Scanned parameters
     int n, s, x;
+
+    // For loop limits -> poizvedovanje
+    int a, b;
 
     cin >> n;
 
@@ -35,6 +39,22 @@ int main() {
         // Poizvedva cez multimnozico
         if (s > 0) {
 
+            // Interval borders
+            if (s > x) {
+                a = s;
+                b = x;
+            } else {
+                a = x; 
+                b = s;
+            }
+
+            for (int i = a; i <= b; i++) {
+                /*
+                Somehow check if the element is in:
+                Multiset {1, 2, 2, 3, 5, 6}, a = 1, b = 3:
+                Contains 4 elements (1, 2, 2, 3)
+                */
+            }
         }
 
 
