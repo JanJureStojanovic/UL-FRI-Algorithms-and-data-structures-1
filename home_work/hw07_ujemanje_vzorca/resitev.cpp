@@ -9,9 +9,6 @@ pair<int, int> ujemanje (string vzorec, string niz);
 
 int main() {
 
-    //pair<int, int> primer = ujemanje("jan", "jurejan");
-    //cout << primer.first << primer.second;
-
     int st_parov; // Number of pairs
     cin >> st_parov;
 
@@ -36,7 +33,7 @@ int main() {
             for (int k = 0; k < vzorec.length(); k++) { 
 
                 // Ni ujemanja -> gremo naprej po nizu
-                if (vzorec[k] != niz[k + j]) {
+                if (vzorec[k] != niz[j + k]) {
                     ujemanje_nizov = false;
                     break;
                 }
@@ -49,17 +46,23 @@ int main() {
                 // We have to check all possibilities
                 if (vzorec[k] = '*') {
 
-                    int x = k + 1; // Vzamemo naslednjega za zvezdico
-                    int y = j; // Vzamemo l-ti znak (kjer smo ostali)
+                    int l = k + 1;
+                    string naslednji_niz;
 
-                    // Najdemo niz, ki pride za '*' in iscemo ujemanje
-                    while (y < vzorec.length()) {
-
-
-
-                        y++;
-
+                    // Najdemo niz za '*' in pogledamo ce ga najdemo v glavnem nizu
+                    while (vzorec[l] != '?' || vzorec[l] != '*') {
+                        naslednji_niz = naslednji_niz + vzorec[l];
+                        l++;
                     }
+
+                    cout << naslednji_niz << endl;
+
+                    /* 
+                    for (int m = 0; m < niz.length() - naslednji_niz.length(); m++) {
+
+                    }*/
+
+
                 }
 
                 k++; // Premik indeksa
@@ -82,7 +85,7 @@ pair<int, int> ujemanje(string vzorec, string niz) {
         bool ujemanje = true;
 
         for (int j = 0; j < vzorec.length(); j++) {
-            
+
             if (vzorec[j] != niz[i + j]) {
                 ujemanje = false;
                 break;
