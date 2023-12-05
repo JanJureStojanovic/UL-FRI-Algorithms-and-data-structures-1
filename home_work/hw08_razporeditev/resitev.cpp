@@ -17,15 +17,30 @@ void print(vector<T> sez) {
 }
 
 void BFS(int n, vector<vector<int>> &sosedi, vector<int> &seq) {
+
     vector<int> vis(n);
+
     queue<int> q;
-    q.push(0); vis[0]=1;
+
+    q.push(0); 
+    
+    vis[0]=1;
+
     while (!q.empty()) {
-        int x=q.front(); q.pop();
+
+        int x=q.front();
+        
+        q.pop();
+
         seq.push_back(x);
+
         for (int y : sosedi[x]) {
+
             if (!vis[y]) {
-                q.push(y); vis[y]=1;
+
+                q.push(y); 
+
+                vis[y] = 1;
             }
         }
     }
@@ -41,23 +56,27 @@ void DFS(int x, vector<vector<int>> &sosedi, vector<int> &seq, vector<int> &vis)
 
 int main() {
 
+    // Osnovna parametra
     int n, m;
-    fin >> n >> m;
+    cin >> n >> m;
 
+    // Glavni data structure
     vector<vector<int>> sosedi(n);
-    cout << "1";
+
+    // Sprejmemo podatke
     for (int i = 0; i < m; i++) {
         int a, b;
-        fin >> a >> b;
+        cin >> a >> b;
         sosedi[a].push_back(b);
         sosedi[b].push_back(a);
     }
-    cout << "2";
+
+    // Izpisemo podatke
     for (int x = 0; x < n; x++) {
         cout << x << ": ";
         print(sosedi[x]);
     }
-    cout << "3";
+
     vector<int> seqB;
     BFS(n,sosedi,seqB);
     print(seqB);
