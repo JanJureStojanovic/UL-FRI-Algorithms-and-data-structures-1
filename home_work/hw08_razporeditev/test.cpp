@@ -41,6 +41,7 @@ int BFS(int x, vector<vector<int>> &adj, vector<int> &vis, vector<int> &seq) {
             for (int a : adj[y]) {
 
                 if (vis[a] == kam_gre) {
+                    
                     return 1;
                 }
             }
@@ -77,7 +78,9 @@ int main() {
     int p;
     
     vector<int> vis(n);
+
     for (int i = 0; i < n; i++) { 
+
         if (vis[i] == 0) { 
             vector<int> seqB;
             p = BFS(i, sosedi, vis, seqB);
@@ -87,6 +90,7 @@ int main() {
             } 
         }
     }
+
     if (p == 1) {
         cout << -1 << endl;
     } else {
