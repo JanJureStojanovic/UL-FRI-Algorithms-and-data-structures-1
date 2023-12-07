@@ -7,6 +7,7 @@
 
 using namespace std;
 
+// Profs. print template for vectors
 template<typename T>
 void print(vector<T> sez) {
     for (T x : sez) {
@@ -18,40 +19,36 @@ void print(vector<T> sez) {
     }
 }
 
-int BFS(int x, vector<vector<int>> &adj, vector<int> &vis, vector<int> &seq) {
+// BFS algo metoda (odstranimo seq vector, ker seq ni pomemben)
+int BFS(int x, vector<vector<int>> &adj, vector<int> &vis) {
 
-    int kam_gre = 1;
-
+    // New queue
     queue<int> q;
     q.push(x); 
 
-    vis[x] = kam_gre;
-
-    kam_gre *= -1;
+    // Vsakic damo na 1 (leksikografsko uredimo 1 -> 2)
+    vis[x] = 1;
 
     while (!q.empty()) {
-        x=q.front();
+        // Queue ops.
+        x = q.front(); 
         q.pop();
-        seq.push_back(x);
-        for (int y : adj[x]) if (vis[y]==0) {
-            q.push(y); 
 
-            // Preverimo ce gre lahko sem
-
-            for (int a : adj[y]) {
-
-                if (vis[a] == kam_gre) {
-                    
-                    return 1;
-                }
+        for (int y : adj[x]) {
+            // Sosednje vozlisce ima isto vrednost oz. barvo -> napaka!
+            if (vis[y] == vis[x]) {
+                return 1;
             }
-
-            vis[y] = kam_gre;
         }
 
-        kam_gre *= -1;
+        for (int y : adj[x]) {
+            // Neobiskanim vozliscam dodelimo vrednost
+            if (vis[y]==0) {
+                q.push(y); 
+                vis[y] = (vis[x] == 1 ) ? 2 : 1;
+            }
+        }
     }
-
     return 0;
 }
 
@@ -69,22 +66,18 @@ int main() {
         sosedi[b-1].push_back(a-1);
     }
 
-    /* 
-    for (int x = 0; x < n; x++) {
-        cout << x << ": ";
-        print(sosedi[x]);
-    }*/
-
-    int p;
+    int result;
     
-    vector<int> vis(n);
+    vector<int> vis;
 
     for (int i = 0; i < n; i++) { 
 
+        // Najdemo vozlisce, ki se ni bilo obiskano
         if (vis[i] == 0) { 
-            vector<int> seqB;
-            p = BFS(i, sosedi, vis, seqB);
 
+            p = BFS(i, sosedi, vis);
+            
+            // Nasli smo error
             if (p == 1) {
                 break;
             } 
@@ -92,8 +85,8 @@ int main() {
     }
 
     if (p == 1) {
-        cout << -1 << endl;
-    } else {
+        cout << -1 << "\n";
+    } else { 
         print(vis);
     }
 }
