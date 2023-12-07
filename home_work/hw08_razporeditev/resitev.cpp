@@ -7,83 +7,86 @@
 
 using namespace std;
 
-typedef pair<int,int> PII;
-typedef vector<pair<int,int>> VII;
-
+// Profs. print template for vectors
 template<typename T>
 void print(vector<T> sez) {
-    for (T x : sez) cout << x << " ";
-    cout << endl;
-}
-
-void BFS(int n, vector<vector<int>> &sosedi, vector<int> &seq) {
-
-    vector<int> vis(n);
-
-    queue<int> q;
-
-    q.push(0); 
-    
-    vis[0]=1;
-
-    while (!q.empty()) {
-
-        int x=q.front();
-        
-        q.pop();
-
-        seq.push_back(x);
-
-        for (int y : sosedi[x]) {
-
-            if (!vis[y]) {
-
-                q.push(y); 
-
-                vis[y] = 1;
-            }
+    for (T x : sez) {
+        if (x == 1) {
+            cout << 1 << endl;
+        } else {
+            cout << 2 << endl;
         }
     }
 }
 
-void DFS(int x, vector<vector<int>> &sosedi, vector<int> &seq, vector<int> &vis) {
-    seq.push_back(x);
-    vis[x]=1;
-    for (int y : sosedi[x]) if (!vis[y]) {
-        DFS(y,sosedi,seq,vis);
+// BFS algo metoda (odstranimo seq vector, ker seq ni pomemben)
+int BFS(int x, vector<vector<int>> &adj, vector<int> &vis) {
+
+    // New queue
+    queue<int> q;
+    q.push(x); 
+
+    // Vsakic damo na 1 (leksikografsko uredimo 1 -> 2)
+    vis[x] = 1;
+
+    while (!q.empty()) {
+        // Queue ops.
+        x = q.front(); 
+        q.pop();
+
+        for (int y : adj[x]) {
+            // Sosednje vozlisce ima isto vrednost oz. barvo -> napaka!
+            if (vis[y] == vis[x]) {
+                return 1;
+            }
+        }
+
+        for (int y : adj[x]) {
+            // Neobiskanim vozliscam dodelimo vrednost
+            if (vis[y]==0) {
+                q.push(y); 
+                vis[y] = (vis[x] == 1 ) ? 2 : 1;
+            }
+        }
     }
+    return 0;
 }
 
 int main() {
 
-    // Osnovna parametra
-    int n, m;
+    int n,m;
     cin >> n >> m;
 
-    // Glavni data structure
     vector<vector<int>> sosedi(n);
 
-    // Sprejmemo podatke
     for (int i = 0; i < m; i++) {
-        int a, b;
+        int a,b;
         cin >> a >> b;
-        sosedi[a].push_back(b);
-        sosedi[b].push_back(a);
+        sosedi[a-1].push_back(b-1);
+        sosedi[b-1].push_back(a-1);
     }
 
-    // Izpisemo podatke
-    for (int x = 0; x < n; x++) {
-        cout << x << ": ";
-        print(sosedi[x]);
+    int result;
+    
+    vector<int> vis(n);
+
+    for (int i = 0; i < n; i++) { 
+
+        // Najdemo vozlisce, ki se ni bilo obiskano
+        if (vis[i] == 0) { 
+
+            result = BFS(i, sosedi, vis);
+            
+            // Nasli smo error
+            if (result == 1) {
+                break;
+            } 
+        }
     }
 
-    vector<int> seqB;
-    BFS(n,sosedi,seqB);
-    print(seqB);
-
-    vector<int> seqD, visD(n);
-    DFS(0,sosedi,seqD,visD);
-    print(seqD);
-
-    return 0;
+    if (result == 1) {
+        cout << -1 << "\n";
+    } else { 
+        print(vis);
+    }
 }
