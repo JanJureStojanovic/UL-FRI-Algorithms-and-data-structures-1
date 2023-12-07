@@ -68,23 +68,23 @@ int main() {
 
     int result;
     
-    vector<int> vis;
+    vector<int> vis(n);
 
     for (int i = 0; i < n; i++) { 
 
         // Najdemo vozlisce, ki se ni bilo obiskano
         if (vis[i] == 0) { 
 
-            p = BFS(i, sosedi, vis);
+            result = BFS(i, sosedi, vis);
             
             // Nasli smo error
-            if (p == 1) {
+            if (result == 1) {
                 break;
             } 
         }
     }
 
-    if (p == 1) {
+    if (result == 1) {
         cout << -1 << "\n";
     } else { 
         print(vis);
