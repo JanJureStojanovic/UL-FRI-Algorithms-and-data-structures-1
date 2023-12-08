@@ -22,7 +22,7 @@ void print(vector<T> sez) {
 // BFS algo metoda (odstranimo seq vector, ker seq ni pomemben)
 int BFS(int x, vector<vector<int>> &adj, vector<int> &vis) {
 
-    // New queue
+    // New queue vsakic ko zacnemo algo
     queue<int> q;
     q.push(x); 
 
