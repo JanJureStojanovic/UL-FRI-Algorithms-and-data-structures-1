@@ -17,31 +17,36 @@ void print(const vector<T> &sez) {
     cout << endl;
 }
 
-void dijkstra(vector<vector<pair<int, int>>> &adjw, int start, vector<int> &dist, vector<int> &prev) {
-    int n = adjw.size();
-    dist = vector<int>(n,-1); 
-    prev = vector<int>(n,-1);
-    vector<int> p(n,-1);  // provisional distance (-1=unvisited, -2=done)
-    p[start] = 0;
+void Dijkstra(vector<VII> &adjw, int start, vector<int> &dist, vector<int> &prev) {
+
+    int n = adjw.size(); // Stevilo vozlisc
+    dist = vector<int>(n, -1); 
+    prev = vector<int>(n, -1);
+    vector<int> p(n, -1);  // Provisional distance (-1 = unvisited, -2 = done)
+    
+    p[start] = 0; // Od kjer smo zaceli je distanca 0
 
     while (1) {
 
-        int x = -1;  // smallest provisional
+        int x = -1;  // Smallest provisional
 
-        for (int i = 0; i < n; i++) if (p[i] >= 0) {
-            if (x == -1 || p[i] < p[x]) x=i;
+        for (int i = 0; i < n; i++) { 
+            if (p[i] >= 0) {
+                if (x == -1 || p[i] < p[x]) {
+                    x = i;  
+                } 
+            }
         }
 
         if (x == -1) break;
-
-        dist[x] = p[x];
+        dist[x] = p[x]; 
         p[x] = -2;
-        
-        for (auto [y,w] : adjw[x]) {  // update neighbors
+
+        for (auto [y,w] : adjw[x]) {  // Update neighbors
             int d = dist[x] + w;
             if (p[y] == -1 || (p[y] >= 0 && d < p[y])) { 
                 p[y] = d; 
-                prev[y]=x; 
+                prev[y] = x; 
             }
         }
     }
@@ -54,7 +59,6 @@ int main() {
     cin >> n >> m;
 
     // Our weighted graph data structure
-    cin >> n >> m;
     vector<VII> adjw(n);
     for (int i=0;i<m;i++) {
         int a,b,w;
@@ -64,8 +68,21 @@ int main() {
     }
 
     vector<int> dist, prev;
-    dijkstra(adjw,0,dist,prev);
-    print(dist); print(prev);
-    
+    Dijkstra(adjw,0,dist,prev);
+    print(dist); 
+    print(prev);
+
+    // Vektor, ki hrani povezave, ki tvorijo naso pot
+    vector<pair<int, int>> pot;
+    int a = n - 1;
+    while (a != 0) {
+        pot.push_back(make_pair(prev[a], a));
+        a = prev[a];
+    }
+    for (int i = pot.size() - 1; i >= 0; i--) {
+        cout << "(" << pot[i].first << ", " << pot[i].second << ")";
+    }
+    cout << endl;
+
     return 0;
 }
