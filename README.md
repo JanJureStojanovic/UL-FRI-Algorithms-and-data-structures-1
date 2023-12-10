@@ -38,7 +38,7 @@ g++ -std=c++20 -o FileName FileName.cpp
 
 Every task with a working makefile and test units can be tested using the following sequence of commands (the provided makefile might not be fully compatible with the test cases included in certain directories):
 ```cpp
-gcc -o FileName FileName.c
+gcc -o FileName FileName.cpp
 export name=FileName
 make test
 ```
