@@ -17,6 +17,29 @@ void print(const vector<T> &sez) {
     cout << endl;
 }
 
+// Method that returns the edges that complete the shortest path 
+vector<pair<int, int>> path_finder(vector<int> prev, int n) {
+
+    // Vektor, ki hrani povezave, ki tvorijo naso pot
+    vector<pair<int, int>> pot;
+
+    int a = n - 1;
+
+    while (a != 0) {
+        pot.push_back(make_pair(prev[a], a));
+        a = prev[a];
+    }
+
+    return pot;
+
+    /*
+    for (int i = pot.size() - 1; i >= 0; i--) {
+        cout << "(" << pot[i].first << ", " << pot[i].second << ")";
+    }
+    cout << endl;
+    */
+}
+
 void Dijkstra(vector<VII> &adjw, int start, vector<int> &dist, vector<int> &prev) {
 
     int n = adjw.size(); // Stevilo vozlisc
@@ -29,7 +52,6 @@ void Dijkstra(vector<VII> &adjw, int start, vector<int> &dist, vector<int> &prev
     while (1) {
 
         int x = -1;  // Smallest provisional
-
         for (int i = 0; i < n; i++) { 
             if (p[i] >= 0) {
                 if (x == -1 || p[i] < p[x]) {
@@ -72,17 +94,7 @@ int main() {
     print(dist); 
     print(prev);
 
-    // Vektor, ki hrani povezave, ki tvorijo naso pot
-    vector<pair<int, int>> pot;
-    int a = n - 1;
-    while (a != 0) {
-        pot.push_back(make_pair(prev[a], a));
-        a = prev[a];
-    }
-    for (int i = pot.size() - 1; i >= 0; i--) {
-        cout << "(" << pot[i].first << ", " << pot[i].second << ")";
-    }
-    cout << endl;
+    vector<pair<int, int>> pot = path_finder(prev, n);
 
     return 0;
 }
