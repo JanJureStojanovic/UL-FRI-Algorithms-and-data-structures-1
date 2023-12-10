@@ -4,7 +4,7 @@ This repository serves as a comprehensive collection of code and projects relate
 
 ## Folder structure
 ```
-.
+|
 ├── home_work
 ├── challanges
 ├── lectures
