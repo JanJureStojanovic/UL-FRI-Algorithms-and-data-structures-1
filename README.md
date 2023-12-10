@@ -1,7 +1,6 @@
 # Algorithms and data structures 1
 This repository serves as a comprehensive collection of code and projects related to the "Algorithms and data structures 1" course offered at the ISRM and FRI programs of University of Ljubljana.
 
-
 ## Folder structure
 ```
 |
@@ -37,3 +36,9 @@ g++ -std=c++20 -o FileName FileName.cpp
 ./FileName
 ```
 
+Every task with a working makefile and test units can be tested using the following sequence of commands (the provided makefile might not be fully compatible with the test cases included in certain directories):
+```cpp
+gcc -o FileName FileName.c
+export name=FileName
+make test
+```
