@@ -65,48 +65,30 @@ vector<pair<int, int>> path_finder(vector<int> prev, int n) {
     }
 
     return pot;
-    /*
-    for (int i = pot.size() - 1; i >= 0; i--) {
-        cout << "(" << pot[i].first << ", " << pot[i].second << ")";
-    }
-    cout << endl;
-    */
 }
 
-void Dijkstra(vector<VII> &adjw, int start, vector<int> &dist, vector<int> &prev) {
+void Dijkstra_PQ(vector<VII> &adjw, int start, vector<int> &dist, vector<int> &prev) {
 
-    int n = adjw.size(); // Stevilo vozlisc
-    dist = vector<int>(n, -1); 
-    prev = vector<int>(n, -1);
-    vector<int> p(n, -1);  // Provisional distance (-1 = unvisited, -2 = done)
-    
-    p[start] = 0; // Od kjer smo zaceli je distanca 0
+    int n = adjw.size();
+    dist = vector<int> (n,-1); 
+    prev = vector<int> (n,-1);
+    priority_queue<PII, vector<PII>, greater<PII>> pq;  // (distance, node)
+    dist[start] = 0; 
+    pq.push({0,start});
 
-    while (1) {
-
-        int x = -1;  // Smallest provisional
-        for (int i = 0; i < n; i++) { 
-            if (p[i] >= 0) {
-                if (x == -1 || p[i] < p[x]) {
-                    x = i;  
-                } 
-            }
-        }
-
-        if (x == -1) break;
-        dist[x] = p[x]; 
-        p[x] = -2;
-
-        for (auto [y,w] : adjw[x]) {  // Update neighbors
-            int d = dist[x] + w;
-            if (p[y] == -1 || (p[y] >= 0 && d < p[y])) { 
-                p[y] = d; 
-                prev[y] = x; 
+    while (!pq.empty()) {
+        auto [d,x] = pq.top(); 
+        pq.pop();
+        if (dist[x] != d) continue;  // ignore old values
+        for (auto [y,w] : adjw[x]) {  // update neighbors
+            int d = dist[x]+  w;
+            if (dist[y]==-1 || d<dist[y]) {
+                dist[y]=d; prev[y]=x;
+                pq.push({d,y});
             }
         }
     }
 }
-
 
 int main() {
 
@@ -123,7 +105,7 @@ int main() {
     }
 
     vector<int> dist, prev;
-    Dijkstra(adjw,0,dist,prev);
+    Dijkstra_PQ(adjw,0,dist,prev);
     //print(dist); 
     //print(prev);
 
@@ -140,7 +122,7 @@ int main() {
 
         vector<int> dist1, prev1;
 
-        Dijkstra(altered_adjw,0,dist1,prev1);
+        Dijkstra_PQ(altered_adjw,0,dist1,prev1);
 
 
         attempt = dist[n-1];
