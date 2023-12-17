@@ -82,6 +82,7 @@ int main() {
     if (dist[n-1] == -1) {
         // If a path doesn't exist we can stop the program
         cout << -1 << "\n";
+        return 0;
 
     } else {
 
@@ -134,8 +135,6 @@ int main() {
         }
     }
 
-    cout << shortest_path_removed_node << "\n";
-
-    return 0;
+    cout << shortest_path_removed_node << endl;
   
 }
