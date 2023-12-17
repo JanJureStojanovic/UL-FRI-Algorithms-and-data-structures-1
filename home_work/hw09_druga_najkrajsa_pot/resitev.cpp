@@ -44,7 +44,7 @@ void dijkstra_PQ(vector<VII> &adjw, int start, vector<int> &dist, vector<int> &p
 }
 
 // Method that returns a vector of consecutive nodes that create the shortest path
-vector<int> shortest_path(vector<int> prev, int n) {
+vector<int> shortest_path(vector<int> &prev, int n) {
 
     vector<int> shortest_path_vector;
     int i = n-1;
