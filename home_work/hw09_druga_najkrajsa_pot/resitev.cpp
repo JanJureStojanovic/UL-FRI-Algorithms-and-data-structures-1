@@ -125,10 +125,6 @@ int main() {
                 shortest_path_removed_node = dist[n - 1];
             }
 
-            if (shortest_path_removed_node == shortest_path_all_nodes + 1) {
-                break;
-            }
-
             // Add back the edge
             adjw[x].push_back({y,edge_weight});
             adjw[y].push_back({x,edge_weight});
