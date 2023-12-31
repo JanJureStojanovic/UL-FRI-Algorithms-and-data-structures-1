@@ -155,6 +155,7 @@ int main() {
     
     //cout << "----------------------" << endl; 
 
+    // Final output 
     for (int i = islands.size() - 1; i >= 0; i--) {
         cout << islands[i] << "\n"; 
     }
