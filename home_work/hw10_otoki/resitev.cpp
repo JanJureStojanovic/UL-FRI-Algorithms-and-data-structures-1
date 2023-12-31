@@ -52,7 +52,6 @@ public:
     }    
 };
 
-
 int main() {
 
     int v, s;
@@ -72,7 +71,7 @@ int main() {
             }
         }
     }
-/* 
+    /* 
     cout << "\n";
 
     // Output sprejetih infomacij po nivojih
@@ -84,16 +83,15 @@ int main() {
         cout << "\n";
     }
     cout << "\n";
-*/
-    vector<int> islands;
-
+    */
+    vector<int> islands; // This vector hold the nuber of islands for each water level
     islands.push_back(0);
 
-    int num_islands = 0;
+    int num_islands = 0; // Used for counting the number of islands
 
-    DisjointSet ds(v*s);
+    DisjointSet ds(v*s); // Main data set (Union find)
 
-    int ds_num;
+    int ds_num; // Location index of each (x, y) coordinate
 
     for (int i = max_height; i > 0; i--) {
 
@@ -102,37 +100,37 @@ int main() {
             // Dodelimo specificno stevilko
             ds_num = matrix[i][j].first*s + matrix[i][j].second;
 
-            // + 1
+            // Land on the right side (+ 1)
             if (ds.isin[ds_num + 1] == 1 && (ds_num + 1 < v*s) && ((ds_num + 1)/s == ds_num/s) && (ds.root(ds_num) != ds.root(ds_num + 1))) {
                 ds.join(ds_num, ds_num + 1);
                 num_islands--;
             }
 
-            // - 1
+            // Land on the left side (- 1)
             if (ds.isin[ds_num - 1] == 1 && (ds_num - 1 >= 0) && ((ds_num - 1)/s == ds_num/s) && (ds.root(ds_num) != ds.root(ds_num - 1))) {
                 ds.join(ds_num, ds_num - 1);
                 num_islands--;
             }
 
-            // + s 
+            // Land above (+ s) 
             if (ds.isin[ds_num + s] == 1 && (ds_num + s < v*s) && (ds.root(ds_num) != ds.root(ds_num + s))) {
                 ds.join(ds_num, ds_num + s);
                 num_islands--;
             }
 
-            // -s 
+            // Land below (-s) 
             if (ds.isin[ds_num - s] == 1 && (ds_num - s >= 0) && (ds.root(ds_num) != ds.root(ds_num - s))) {
                 ds.join(ds_num, ds_num - s);
                 num_islands--;
             }  
 
+            // Mark the (x, y) coordinate
             ds.add(ds_num);
             num_islands++;
         }
 
-        islands.push_back(num_islands);
-
-/* 
+        islands.push_back(num_islands); // Store the number of islands for this water level
+        /* 
         cout << "----------------------" << endl;
 
         cout << "Number of islands: ";
@@ -150,7 +148,7 @@ int main() {
             cout << ds.isin[k];
         }
         cout << "\n";
-*/
+        */
     }
     
     //cout << "----------------------" << endl; 
