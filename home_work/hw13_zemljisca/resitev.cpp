@@ -6,6 +6,7 @@
 
 using namespace std;
 
+// Preverimo prekrivanje pravokotnikov
 bool prekrivanje(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
     if (x1 >= x2 || y1 >= y2 || x3 >= x4 || y3 >= y4) { 
         return false;
@@ -72,8 +73,6 @@ int main() {
             y4 = temp_y;
         }
 
-        //cout << x1 << " " << y1<< " " << x2<< " " << y2<< " " << x3 << " " << y3 << " " << x4 << " " << y4 << endl;
-
         // Size comparison
         size1 = abs((x2 - x1)*(y2 - y1));
         size2 = abs((x4 - x3)*(y4 - y3));
@@ -83,136 +82,116 @@ int main() {
             cout << 0 << "\n";
             continue;
         }
-        //cout << curr_min << "\n";
 
         // Iscemo razdalje, ce sta zemljisci v skupnem pasu
         // Najdemo vecje zemljisce in pogledamo ce sta v skupnih pasovih (x-os in y-os)
         
-            // Pas po x-osi
-            // Spodnji rob manjsega zemljisca znotraj pasu vecjega zemljisca
-            if (y3 >= y1 && y3 <= y2) {
-                if (x3 >= x2) {
-                    curr_min = curr_min < abs(x3 - x2)*8 ? curr_min : abs(x3 - x2)*8; // Manjse zemljisce je desno
-                    //cout << curr_min << "\n";
-                }
-                if (x4 <= x1) {
-                    curr_min = curr_min < abs(x1 - x4)*8 ? curr_min : abs(x1 - x4)*8; // Manjse zemljisce je levo
-                    //cout << curr_min << "\n";
-                }
+        // Pas po x-osi
+        // Spodnji rob manjsega zemljisca znotraj pasu vecjega zemljisca
+        if (y3 >= y1 && y3 <= y2) {
+            if (x3 >= x2) {
+                curr_min = curr_min < abs(x3 - x2)*8 ? curr_min : abs(x3 - x2)*8; // Manjse zemljisce je desno
             }
-            // Zgornji rob manjsega zemljisca znotraj pasu vecjega zemljisca
-            if (y4 >= y1 && y4 <= y2) {
-                if (x3 >= x2) {
-                    curr_min = curr_min < abs(x3 - x2)*8 ? curr_min : abs(x3 - x2)*8; // Manjse zemljisce je desno
-                //cout << curr_min << "\n";
-                }
-                if (x4 <= x1) {
-                    curr_min = curr_min < abs(x1 - x4)*8 ? curr_min : abs(x1 - x4)*8; // Manjse zemljisce je levo
-                    //cout << curr_min << "\n";
-                }
+            if (x4 <= x1) {
+                curr_min = curr_min < abs(x1 - x4)*8 ? curr_min : abs(x1 - x4)*8; // Manjse zemljisce je levo
             }
-            if (x3 >= x1 && x3 <= x2) {
-                if (y4 <= y1) {
-                    curr_min = curr_min < abs(y4 - y1)*8 ? curr_min : abs(y4 - y1)*8; // Manjse zemljisce je spodaj
-                    // cout << curr_min << "\n";
-                }
-                if (y3 >= y2) {
-                    curr_min = curr_min < abs(y2 - y3)*8 ? curr_min : abs(y2 - y3)*8; // Manjse zemljisce je zgoraj  
-                    // cout << curr_min << "\n";
-                }           
+        }
+        // Zgornji rob manjsega zemljisca znotraj pasu vecjega zemljisca
+        if (y4 >= y1 && y4 <= y2) {
+            if (x3 >= x2) {
+                curr_min = curr_min < abs(x3 - x2)*8 ? curr_min : abs(x3 - x2)*8; // Manjse zemljisce je desno
             }
-            // Desni rob manjsega zemljisca znotraj pasu vecjega zemljisca
-            if (x4 >= x1 && x4 <= x2) {
-                if (y4 <= y1) {
-                    curr_min = curr_min < abs(y4 - y1)*8 ? curr_min : abs(y4 - y1)*8; // Manjse zemljisce je spodaj
-                    // cout << curr_min << "\n";
-                }
-                if (y3 >= y2) {
-                    curr_min = curr_min < abs(y2 - y3)*8 ? curr_min : abs(y2 - y3)*8; // Manjse zemljisce je zgoraj  
-                    // cout << curr_min << "\n";
-                }
+            if (x4 <= x1) {
+                curr_min = curr_min < abs(x1 - x4)*8 ? curr_min : abs(x1 - x4)*8; // Manjse zemljisce je levo
             }
+        }
+        if (x3 >= x1 && x3 <= x2) {
+            if (y4 <= y1) {
+                curr_min = curr_min < abs(y4 - y1)*8 ? curr_min : abs(y4 - y1)*8; // Manjse zemljisce je spodaj
+            }
+            if (y3 >= y2) {
+                curr_min = curr_min < abs(y2 - y3)*8 ? curr_min : abs(y2 - y3)*8; // Manjse zemljisce je zgoraj  
+            }           
+        }
+        // Desni rob manjsega zemljisca znotraj pasu vecjega zemljisca
+        if (x4 >= x1 && x4 <= x2) {
+            if (y4 <= y1) {
+                curr_min = curr_min < abs(y4 - y1)*8 ? curr_min : abs(y4 - y1)*8; // Manjse zemljisce je spodaj
+            }
+            if (y3 >= y2) {
+                curr_min = curr_min < abs(y2 - y3)*8 ? curr_min : abs(y2 - y3)*8; // Manjse zemljisce je zgoraj  
+            }
+        }
         // Menjava spremenljivk
+        // Pas po x-osi
+        // Spodnji rob manjsega zemljisca znotraj pasu vecjega zemljisca
+        if (y1 >= y3 && y1 <= y4) {
+            if (x3 >= x2) {
+                curr_min = curr_min < abs(x3 - x2)*8 ? curr_min : abs(x3 - x2)*8; // Manjse zemljisce je levo
+            }
+            if (x4 <= x1) {
+                curr_min = curr_min < abs(x1 - x4)*8 ? curr_min : abs(x1 - x4)*8; // Manjse zemljisce je desno
+            }
+        }
+        // Zgornji rob manjsega zemljisca znotraj pasu vecjega zemljisca
+        if (y2 >= y3 && y2 <= y4) {
+            if (x3 >= x2) {
+                curr_min = curr_min < abs(x3 - x2)*8 ? curr_min : abs(x3 - x2)*8; // Manjse zemljisce je levo
+            }
+            if (x4 <= x1) {
+                curr_min = curr_min < abs(x1 - x4)*8 ? curr_min : abs(x1 - x4)*8; // Manjse zemljisce je desno
+            }
+        }
+        // Pas po y-osi
+        // Levi rob manjsega zemljisca znotraj pasu vecjega zemljisca
+        if (x1 >= x3 && x1 <= x4) {
+            if (y4 <= y1) {
+                curr_min = curr_min < abs(y4 - y1)*8 ? curr_min : abs(y4 - y1)*8; // Manjse zemljisce je spodaj
+            }
+            if (y3 >= y2) {
+                curr_min = curr_min < abs(y2 - y3)*8 ? curr_min : abs(y2 - y3)*8; // Manjse zemljisce je zgoraj  
+            }           
+        }
+        // Desni rob manjsega zemljisca znotraj pasu vecjega zemljisca
+        if (x2 >= x3 && x2 <= x4) {
+            if (y4 <= y1) {
+                curr_min = curr_min < abs(y4 - y1)*8 ? curr_min : abs(y4 - y1)*8; // Manjse zemljisce je spodaj
+            }
+            if (y3 >= y2) {
+                curr_min = curr_min < abs(y2 - y3)*8 ? curr_min : abs(y2 - y3)*8; // Manjse zemljisce je zgoraj  
+            }
+        }
         
-            // Pas po x-osi
-            // Spodnji rob manjsega zemljisca znotraj pasu vecjega zemljisca
-            if (y1 >= y3 && y1 <= y4) {
-                if (x3 >= x2) {
-                    curr_min = curr_min < abs(x3 - x2)*8 ? curr_min : abs(x3 - x2)*8; // Manjse zemljisce je levo
-                    // cout << curr_min << "\n";
-                }
-                if (x4 <= x1) {
-                    curr_min = curr_min < abs(x1 - x4)*8 ? curr_min : abs(x1 - x4)*8; // Manjse zemljisce je desno
-                    // cout << curr_min << "\n";
-                }
-            }
-            // Zgornji rob manjsega zemljisca znotraj pasu vecjega zemljisca
-            if (y2 >= y3 && y2 <= y4) {
-                if (x3 >= x2) {
-                    curr_min = curr_min < abs(x3 - x2)*8 ? curr_min : abs(x3 - x2)*8; // Manjse zemljisce je levo
-                    // cout << curr_min << "\n";
-                }
-                if (x4 <= x1) {
-                    curr_min = curr_min < abs(x1 - x4)*8 ? curr_min : abs(x1 - x4)*8; // Manjse zemljisce je desno
-                    // cout << curr_min << "\n";
-                }
-            }
-            // Pas po y-osi
-            // Levi rob manjsega zemljisca znotraj pasu vecjega zemljisca
-            if (x1 >= x3 && x1 <= x4) {
-                if (y4 <= y1) {
-                    curr_min = curr_min < abs(y4 - y1)*8 ? curr_min : abs(y4 - y1)*8; // Manjse zemljisce je spodaj
-                    // cout << curr_min << "\n";
-                }
-                if (y3 >= y2) {
-                    curr_min = curr_min < abs(y2 - y3)*8 ? curr_min : abs(y2 - y3)*8; // Manjse zemljisce je zgoraj  
-                    // cout << curr_min << "\n";
-                }           
-            }
-            // Desni rob manjsega zemljisca znotraj pasu vecjega zemljisca
-            if (x2 >= x3 && x2 <= x4) {
-                if (y4 <= y1) {
-                    curr_min = curr_min < abs(y4 - y1)*8 ? curr_min : abs(y4 - y1)*8; // Manjse zemljisce je spodaj
-                    // cout << curr_min << "\n";
-                }
-                if (y3 >= y2) {
-                    curr_min = curr_min < abs(y2 - y3)*8 ? curr_min : abs(y2 - y3)*8; // Manjse zemljisce je zgoraj  
-                    // cout << curr_min << "\n";
-                }
-            }
-        
-
         // Ce nista v istih pasovih (ni prekrivanja) -> pitagorov izrek
         // Zemljisce ena v sredini in zemljisce dve okoli
         curr_min = curr_min < ((sqrt((x3 - x2)*(x3 - x2) + (y3 - y2)*(y3 - y2)))*8) ? 
                    curr_min : ((sqrt((x3 - x2)*(x3 - x2) + (y3 - y2)*(y3 - y2)))*8); // Desno zgoraj
-                //    cout << curr_min << "\n";
+
         curr_min = curr_min < ((sqrt((x3 - x2)*(x3 - x2) + (y1 - y4)*(y1 - y4)))*8) ?
                    curr_min : ((sqrt((x3 - x2)*(x3 - x2) + (y1 - y4)*(y1 - y4)))*8); // Desno spodaj
-                //    cout << curr_min << "\n";
+
         curr_min = curr_min < ((sqrt((x1 - x4)*(x1 - x4) + (y3 - y2)*(y3 - y2)))*8) ?
                    curr_min : ((sqrt((x1 - x4)*(x1 - x4) + (y3 - y2)*(y3 - y2)))*8); // Levo zgoraj
-                //    cout << curr_min << "\n";
+
         curr_min = curr_min < ((sqrt((x1 - x4)*(x1 - x4) + (y1 - y4)*(y1 - y4)))*8) ?
                    curr_min : ((sqrt((x1 - x4)*(x1 - x4) + (y1 - y4)*(y1 - y4)))*8); // Levo spodaj
-                //    cout << curr_min << "\n";
+
         // Zemljisce dve v sredini in zemljisce ena okoli
         curr_min = curr_min < ((sqrt((x1 - x4)*(x1 - x4) + (y1 - y4)*(y1 - y4)))*8) ? 
                    curr_min : ((sqrt((x1 - x4)*(x1 - x4) + (y1 - y4)*(y1 - y4)))*8); // Desno zgoraj
-                //    cout << curr_min << "\n";
+
         curr_min = curr_min < ((sqrt((x1 - x4)*(x1 - x4) + (y3 - y2)*(y3 - y2)))*8) ?
                    curr_min : ((sqrt((x1 - x4)*(x1 - x4) + (y3 - y2)*(y3 - y2)))*8); // Desno spodaj
-                //    cout << curr_min << "\n";
+
         curr_min = curr_min < ((sqrt((x3 - x2)*(x3 - x2) + (y1 - y4)*(y1 - y4)))*8) ?
                    curr_min : ((sqrt((x3 - x2)*(x3 - x2) + (y1 - y4)*(y1 - y4)))*8); // Levo zgoraj
-                   //cout << curr_min << "\n";
+
         curr_min = curr_min < ((sqrt((x3 - x2)*(x3 - x2) + (y3 - y2)*(y3 - y2)))*8) ?
                    curr_min : ((sqrt((x3 - x2)*(x3 - x2) + (y3 - y2)*(y3 - y2)))*8); // Levo spodaj
-                //    cout << curr_min << "\n";
+
 
         // Output minimum distance
         cout << ceil(curr_min) << "\n";
-        // cout << ceil(curr_min)/8 << "\n";
     }
 
     return 0;
