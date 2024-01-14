@@ -28,7 +28,6 @@ int main() {
 
     // Podatki o zemljiscih in spremenljivki, ki bosta hranili njihovo velikost
     int x1, y1, x2, y2, x3, y3, x4, y4;
-    int size1, size2;
 
     // Main for loop, cez vso stevilo primerov
     for (int i = 0; i < t; i++) {
@@ -73,10 +72,6 @@ int main() {
             y4 = temp_y;
         }
 
-        // Size comparison
-        size1 = abs((x2 - x1)*(y2 - y1));
-        size2 = abs((x4 - x3)*(y4 - y3));
-
         // Ce imamo prekrivanje takoj output 0
         if (prekrivanje(x1, y1, x2, y2, x3, y3, x4, y4) == true) {
             cout << 0 << "\n";
@@ -84,7 +79,6 @@ int main() {
         }
 
         // Iscemo razdalje, ce sta zemljisci v skupnem pasu
-        // Najdemo vecje zemljisce in pogledamo ce sta v skupnih pasovih (x-os in y-os)
         
         // Pas po x-osi
         // Spodnji rob manjsega zemljisca znotraj pasu vecjega zemljisca
@@ -106,7 +100,7 @@ int main() {
             }
         }
         if (x3 >= x1 && x3 <= x2) {
-            if (y4 <= y1) {
+            if (y4 <= y1) { 
                 curr_min = curr_min < abs(y4 - y1)*8 ? curr_min : abs(y4 - y1)*8; // Manjse zemljisce je spodaj
             }
             if (y3 >= y2) {
