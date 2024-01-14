@@ -20,8 +20,8 @@ def plot_rectangles(x1, y1, x2, y2, x3, y3, x4, y4):
     plt.show()
  
 # Example usage with the reordered points
-x1, y1, x2, y2 = 569, 8249, -1828, -2051 
-x3, y3, x4, y4 = 3265, 7028, 7715, -775 
+x1, y1, x2, y2 = 9761, 9761, 9761, 9920
+x3, y3, x4, y4 = 9481, 9909, 9944, 9841,
 
 # Reorder the points if needed
 if x1 > x2:
