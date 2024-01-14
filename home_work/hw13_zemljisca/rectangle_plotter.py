@@ -18,10 +18,10 @@ def plot_rectangles(x1, y1, x2, y2, x3, y3, x4, y4):
 
     plt.gca().set_aspect('equal', adjustable='box')  # Equal aspect ratio for x and y axes
     plt.show()
- 
+#-9998 -9998 -9997 -9994 -9957 -10000 -10000 -10000
 # Example usage with the reordered points
-x1, y1, x2, y2 = 9761, 9761, 9761, 9920
-x3, y3, x4, y4 = 9481, 9909, 9944, 9841,
+x1, y1, x2, y2, x3, y3, x4, y4 =  -9998, -9998, -9997, -9994, -9957, -10000, -10000, -10000
+
 
 # Reorder the points if needed
 if x1 > x2:

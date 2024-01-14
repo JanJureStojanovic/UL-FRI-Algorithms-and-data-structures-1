@@ -8,13 +8,13 @@ using namespace std;
 
 // Preverimo prekrivanje pravokotnikov
 bool prekrivanje(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
-    if (x1 >= x2 || y1 >= y2 || x3 >= x4 || y3 >= y4) { 
+    /*if (x1 == x2 || y1 == y2 || x3 == x4 || y3 == y4) { 
+        return false;
+    }*/
+    if (x1 > x4 || x3 > x2) {
         return false;
     }
-    if (x2 <= x3 || x4 <= x1) {
-        return false;
-    }
-    if (y2 <= y3 || y4 <= y1) {
+    if (y1 > y4 || y3 > y2) {
         return false;
     }
     return true;
