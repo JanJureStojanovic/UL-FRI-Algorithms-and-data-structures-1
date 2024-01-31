@@ -18,9 +18,13 @@ def plot_rectangles(x1, y1, x2, y2, x3, y3, x4, y4):
 
     plt.gca().set_aspect('equal', adjustable='box')  # Equal aspect ratio for x and y axes
     plt.show()
-#-9998 -9998 -9997 -9994 -9957 -10000 -10000 -10000
-# Example usage with the reordered points
-x1, y1, x2, y2, x3, y3, x4, y4 =  -9998, -9998, -9997, -9994, -9957, -10000, -10000, -10000
+
+input_str = input("Enter 8 consecutive integers: ")
+values = input_str.split()
+
+# Convert each string to an integer
+x1, y1, x2, y2, x3, y3, x4, y4 = map(int, values)
+
 
 
 # Reorder the points if needed

@@ -8,9 +8,7 @@ using namespace std;
 
 // Preverimo prekrivanje pravokotnikov
 bool prekrivanje(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
-    /*if (x1 == x2 || y1 == y2 || x3 == x4 || y3 == y4) { 
-        return false;
-    }*/
+
     if (x1 > x4 || x3 > x2) {
         return false;
     }
@@ -38,39 +36,41 @@ int main() {
         cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
 
         // Uredimo tocke prvega zemljisca (T1 - levo spodaj, T2 desno zgoraj in T3 levo spodaj in T4 desno zgoraj)
-        if (x1 > x2 && y1 > y2) { // Zamenjamo jih med sabo (x2 -> x1 in x1 -> x2)
+        if (x1 >= x2 && y1 >= y2) { // Zamenjamo jih med sabo (x2 -> x1 in x1 -> x2)
             int temp_x = x1;
             int temp_y = y1;
             x1 = x2;
             y1 = y2;
             x2 = temp_x;
             y2 = temp_y;
-        } else if (x1 > x2 && y1 < y2) { // Visine so ok, spremenimo x-a
+        } else if (x1 >= x2 && y1 <= y2) { // Visine so ok, spremenimo x-a
             int temp_x = x1;
             x1 = x2;
             x2 = temp_x;
-        } else if (x1 < x2 && y1 > y2) {
+        } else if (x1 <= x2 && y1 >= y2) {
             int temp_y = y1;
             y1 = y2;
             y2 = temp_y;
         }
         // Uredimo tocke drugega zemljisca (T1 - levo spodaj, T2 desno zgoraj in T3 levo spodaj in T4 desno zgoraj)
-        if (x3 > x4 && y3 > y4) { // Zamenjamo jih med sabo (x4 -> x3 in y4 -> y3)
+        if (x3 >= x4 && y3 >= y4) { // Zamenjamo jih med sabo (x4 -> x3 in y4 -> y3)
             int temp_x = x3;
             int temp_y = y3;
             x3 = x4;
             y3 = y4;
             x4 = temp_x;
             y4 = temp_y;
-        } else if (x3 > x4 && y3 < y4) { // Visine so ok, spremenimo x-a
+        } else if (x3 >= x4 && y3 <= y4) { // Visine so ok, spremenimo x-a
             int temp_x = x3;
             x3 = x4;
             x4 = temp_x;
-        } else if (x3 < x4 && y3 > y4) {
+        } else if (x3 <= x4 && y3 >= y4) {
             int temp_y = y3;
             y3 = y4;
             y4 = temp_y;
         }
+
+        // cout << x1 << " " << y1 << " " << x2 << " " << y2 << " " << x3 << " " << y3 << " " << x4 << " " << y4 << endl;
 
         // Ce imamo prekrivanje takoj output 0
         if (prekrivanje(x1, y1, x2, y2, x3, y3, x4, y4) == true) {
@@ -79,7 +79,82 @@ int main() {
         }
 
         // Iscemo razdalje, ce sta zemljisci v skupnem pasu
-        
+        if ((x1 >= x3 && x1 <= x4) || (x2 >= x3 && x2 <= x4)) {
+            // cout << "a" << endl;
+            if (y4 <= y1) {
+                curr_min = curr_min < abs(y4 - y1)*8 ? curr_min : abs(y4 - y1)*8; // Manjse zemljisce je spodaj
+                // cout << "1" << endl;
+            }
+            else if (y3 >= y2) {
+                curr_min = curr_min < abs(y2 - y3)*8 ? curr_min : abs(y2 - y3)*8; // Manjse zemljisce je zgoraj  
+                // cout << "2" << endl;
+            }
+        }
+        else if ((x4 >= x1 && x4 <= x3) || (x3 >= x1 && x3 <= x2)) {
+            // cout << "b" << endl;
+            if (y4 <= y1) {
+                curr_min = curr_min < abs(y4 - y1)*8 ? curr_min : abs(y4 - y1)*8; // Manjse zemljisce je spodaj
+                // cout << "3" << endl;
+            }
+            else if (y3 >= y2) {
+                curr_min = curr_min < abs(y2 - y3)*8 ? curr_min : abs(y2 - y3)*8; // Manjse zemljisce je zgoraj 
+                // cout << "4" << endl; 
+            }
+        }
+
+        // Iscemo razdalje, ce sta zemljisci v skupnem pasu
+        else if ((y1 >= y3 && y1 <= y4) || (y2 >= y3 && y2 <= y4)) {
+            // cout << "c" << endl;
+            if (x4 <= x1) {
+                curr_min = curr_min < abs(x4 - x1)*8 ? curr_min : abs(x4 - x1)*8; // Manjse zemljisce je spodaj
+                // cout << "5" << endl;
+            }
+            else if (x3 >= x2) {
+                curr_min = curr_min < abs(x2 - x3)*8 ? curr_min : abs(x2 - x3)*8; // Manjse zemljisce je zgoraj  
+                // cout << "6" << endl;
+            }
+        }
+        else if ((y4 >= y1 && y4 <= y2) || (y3 >= y1 && y3 <= y2)) {
+            // cout << "d" << endl;
+            if (x4 <= x1) {
+                curr_min = curr_min < abs(x4 - x1)*8 ? curr_min : abs(x4 - x1)*8; // Manjse zemljisce je spodaj
+                // cout << "7" << endl;
+            }
+            else if (x3 >= x2) {
+                curr_min = curr_min < abs(x3 - x1)*8 ? curr_min : abs(x3 - x2)*8; // Manjse zemljisce je zgoraj  
+                // cout << "8" << endl;
+            }
+        }
+
+        if (x1 >= x4 && y1 >= y4) { // Levo spodaj
+            // cout << "Levo spodaj" << endl;
+            curr_min = curr_min < ((sqrt((x1 - x4)*(x1 - x4) + (y1 - y4)*(y1 - y4)))*8) ? 
+                       curr_min : ((sqrt((x1 - x4)*(x1 - x4) + (y1 - y4)*(y1 - y4)))*8);
+        } 
+        else if (x2 <= x3 && y1 >= y4) { // Desno spodaj
+            // cout << "Desno spodaj" << endl;
+            curr_min = curr_min < ((sqrt((x3 - x2)*(x3 - x2) + (y1 - y4)*(y1 - y4)))*8) ? 
+                       curr_min : ((sqrt((x3 - x2)*(x3 - x2) + (y1 - y4)*(y1 - y4)))*8);
+
+        }
+        else if (x3 >= x2 && y3 >= y2) { // Desno zgoraj
+            // cout << "Desno zgoraj" << endl;
+            curr_min = curr_min < ((sqrt((x3 - x2)*(x3 - x2) + (y3 - y2)*(y3 - y2)))*8) ? 
+                       curr_min : ((sqrt((x3 - x2)*(x3 - x2) + (y3 - y2)*(y3 - y2)))*8);
+        }
+        else if (x1 >= x4 && y4 >= y2) { // Levo zgoraj
+            // cout << "Levo zgoraj" << endl;
+            curr_min = curr_min < ((sqrt((x1 - x4)*(x1 - x4) + (y3 - y2)*(y3 - y2)))*8) ? 
+                       curr_min : ((sqrt((x1 - x4)*(x1 - x4) + (y3 - y2)*(y3 - y2)))*8);
+        }
+
+        // Output minimum distance
+        cout << ceil(curr_min) << "\n";
+    }
+
+    return 0;
+}
+/* 
         // Pas po x-osi
         // Spodnji rob manjsega zemljisca znotraj pasu vecjega zemljisca
         if (y3 >= y1 && y3 <= y2) {
@@ -182,11 +257,4 @@ int main() {
 
         curr_min = curr_min < ((sqrt((x3 - x2)*(x3 - x2) + (y3 - y2)*(y3 - y2)))*8) ?
                    curr_min : ((sqrt((x3 - x2)*(x3 - x2) + (y3 - y2)*(y3 - y2)))*8); // Levo spodaj
-
-
-        // Output minimum distance
-        cout << ceil(curr_min) << "\n";
-    }
-
-    return 0;
-}
+*/
