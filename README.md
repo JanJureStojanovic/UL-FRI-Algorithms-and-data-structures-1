@@ -19,7 +19,7 @@ This repository serves as a comprehensive collection of code and projects relate
     Holds weekly source code from our lectures and Jupyter Notebook files that serve as curriculum notes
 
 ## Setup 
-Each program can be tested using the following sequence of commands:
+Each program can be tested using the following sequence of terminal commands:
 
 ```cpp
 g++ -std=c++20 -o FileName FileName.cpp 
